@@ -7,7 +7,13 @@ module Braise
 
   @@valid_config_keys = @@config.keys
 
-  def braise(obj, opts={})
+  # brief raise
+  def braise(obj)
+    raise obj.inspect
+  end
+
+  # colored raise
+  def craise(obj, opts={})
     opts_str = stringify_options(@@config.merge(opts))
 
     raise (opts_str + obj.inspect + ANSI.clear)
