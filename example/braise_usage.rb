@@ -1,7 +1,6 @@
 require 'braise'
-require 'ansi'
 include Braise
 
 arr = [1, 2, 3]
 
-braise arr
+braise arr # equivalent to "raise arr.inspect"
