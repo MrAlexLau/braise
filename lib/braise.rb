@@ -26,7 +26,7 @@ module Braise
   private 
 
   def stringify_options(opts_hash)
-    return opts_hash.inject(""){|result, pair| result.to_s + " " + pair[1].to_s}.strip
+    return opts_hash.values.join(" ").strip
   end
 
 end
