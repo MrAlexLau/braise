@@ -34,10 +34,12 @@ See the `examples` folder for specific examples of the `braise` and `craise` met
 
 ### Rails applications
 It is recommend that you put the braise gem in your `:development` group in the Gemfile:
+```
   group :development do
     # ...other development gems
     gem 'braise'
   end
+```
 
 The gem will still work if you add it to top level of the Gemfile, but probably shouldn't be since Braise is intended to be used as a debugging tool.
 
