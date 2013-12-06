@@ -24,7 +24,7 @@ On the command line, simply run:
 
     $ gem install braise
 
-Then in your ruby program, be sure to require and include Braise:
+Then in the ruby program, be sure to require and include Braise:
 ```
 require 'braise'
 include Braise
@@ -33,7 +33,7 @@ include Braise
 See the `examples` folder for specific examples of the `braise` and `craise` methods.
 
 ### Rails applications
-It is recommend that you put the braise gem in your `:development` group in the Gemfile:
+It is recommend that you put the braise gem in the `:development` group in the Gemfile:
 ```
   group :development do
     # ...other development gems
