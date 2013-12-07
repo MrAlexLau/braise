@@ -12,7 +12,7 @@ module Braise
     raise obj.inspect
   end
 
-  # colored raise
+  # colorful raise
   def craise(obj, opts={})
     opts_str = stringify_options(@@config.merge(opts))
 

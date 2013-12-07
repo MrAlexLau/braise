@@ -19,7 +19,7 @@ describe Braise do
   end # end braise
 
   describe "craise" do
-    it "should raise an exception with colored font on an inspected array" do
+    it "should raise an exception with colorful font on an inspected array" do
       arr = [1, 2]
 
       begin
