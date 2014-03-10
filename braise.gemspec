@@ -7,8 +7,8 @@ Gem::Specification.new do |spec|
   spec.name          = "braise"
   spec.version       = Braise::VERSION
   spec.authors       = ["Alex Lau"]
-  spec.description   = "Better raise for ruby"
-  spec.summary       = "Add extra options to ruby's raise method."
+  spec.description   = "Syntatic sugar for the raise method"
+  spec.summary       = "Shortcuts `raise obj.inspect` and makes it easy to add color terminal output"
   spec.homepage      = "https://github.com/MrAlexLau/braise"
   spec.license       = "MIT"
 
@@ -20,6 +20,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
-  
+
   spec.add_dependency "ansi"
 end
