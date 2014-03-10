@@ -6,8 +6,8 @@ describe Braise do
     @@config = { :color => ANSI.white_on_red, :additional_flags => "" }
   end
 
-  describe "braise" do
-    it "should raise an exception on an inspected array" do
+  describe 'braise' do
+    it 'should raise an exception on an inspected array' do
       arr = [1, 2]
 
       begin
@@ -18,8 +18,8 @@ describe Braise do
     end
   end # end braise
 
-  describe "craise" do
-    it "should raise an exception with colorful font on an inspected array" do
+  describe 'craise' do
+    it 'should raise an exception with colorful font on an inspected array' do
       arr = [1, 2]
 
       begin
@@ -29,8 +29,8 @@ describe Braise do
       end
     end
 
-    it "should raise an exception with a green background" do
-      Braise.configure({:color => ANSI.green})
+    it 'should raise an exception with a green background' do
+      Braise::Settings.configure({:color => ANSI.green})
       arr = [1, 2]
 
       begin
@@ -41,64 +41,64 @@ describe Braise do
     end
   end # end craise
 
-  describe "configure" do
-    it "should set color option" do
-      # white_on_red is the default color scheme
-      @@config[:color].should eq(ANSI.white_on_red)
 
-      # example background color
-      configure({:color => ANSI.on_green})
-      @@config[:color].should eq(ANSI.on_green)
+  describe 'Settings' do
+    describe 'configure' do
+      it 'should set color option' do
+        # white_on_red is the default color scheme
+        Braise::Settings.get_options().should eq(ANSI.white_on_red)
 
-      # example font color
-      configure({:color => ANSI.red})
-      @@config[:color].should eq(ANSI.red)
+        # example background color
+        Braise::Settings.configure({:color => ANSI.on_green})
+        Braise::Settings.get_options().should eq(ANSI.on_green)
 
-      # example mixed color
-      configure({:color => ANSI.black_on_yellow})
-      @@config[:color].should eq(ANSI.black_on_yellow)
-    end
+        # example font color
+        Braise::Settings.configure({:color => ANSI.red})
+        Braise::Settings.get_options().should eq(ANSI.red)
 
-    it "should set additional_flags option" do
-      # the default additional_flags setting is empty
-      @@config[:additional_flags].should be_empty
+        # example mixed color
+        Braise::Settings.configure({:color => ANSI.black_on_yellow})
+        Braise::Settings.get_options().should eq(ANSI.black_on_yellow)
+      end
 
-      # example background additional_flags
-      configure({:additional_flags => "any other option"})
-      @@config[:additional_flags].should eq("any other option")
-    end
+      it 'should set additional_flags option' do
+        opts_before = Braise::Settings.get_options()
+        additional_opts = 'any other option'
 
-    it "should set both options at once" do
-      # the default additional_flags setting is empty
-      @@config[:additional_flags].should be_empty
-      # white_on_red is the default color scheme
-      @@config[:color].should eq(ANSI.white_on_red)
+        # example background additional_flags
+        Braise::Settings.configure({:additional_flags => additional_opts})
+        Braise::Settings.get_options().should eq("#{opts_before} #{additional_opts}")
+      end
 
-      configure({:color => ANSI.blue, :additional_flags => "any other option"})
-      @@config[:color].should eq(ANSI.blue)
-      @@config[:additional_flags].should eq("any other option")
-    end
+      it 'should set both options at once' do
+        additional_opts = 'any other option'
 
-    it "should not set key with invalid name" do
-      # the default additional_flags setting is empty
-      @@config[:invalid_key].should be_nil
+        Braise::Settings.get_options().should_not eq("#{ANSI.blue} #{additional_opts}")
+        Braise::Settings.configure({:color => ANSI.blue, :additional_flags => additional_opts})
+        Braise::Settings.get_options().should eq("#{ANSI.blue} #{additional_opts}")
+      end
 
-      configure({:invalid_key => "a string"})
-      @@config[:invalid_key].should be_nil
-    end
-  end # end configure
+      it 'should not set key with invalid name' do
+        invalid_string = 'a string'
+        opts_before = Braise::Settings.get_options()
 
-  describe "stringify_options" do
-    it "should convert empty hash to empty string" do
-      stringify_options({}).should be_empty
-    end
+        Braise::Settings.configure({:invalid_key => invalid_string})
+        Braise::Settings.get_options().index(invalid_string).should be_nil
+      end
+    end # end configure
 
-    it "should convert options hash to string" do
-      # results should be separated by spaces
-      stringify_options({:key1 => "value1", :key2 => "value2"}).should eq("value1 value2")
-      stringify_options({:key1 => "value1", :key2 => "value2", :key3 => "value3"}).should eq("value1 value2 value3")
-    end
-  end # end stringify_options
+    describe 'stringify_options' do
+      it 'should convert empty hash to empty string' do
+        Braise::Settings.stringify_options({}).should be_empty
+      end
+
+      it 'should convert options hash to string' do
+        # results should be separated by spaces
+        Braise::Settings.stringify_options({:key1 => 'value1', :key2 => 'value2'}).should eq('value1 value2')
+        Braise::Settings.stringify_options({:key1 => 'value1', :key2 => 'value2', :key3 => 'value3'}).should eq('value1 value2 value3')
+      end
+    end # end stringify_options
+  end # end Settings
 
 
 end
